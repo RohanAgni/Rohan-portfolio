@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohan Agnihotri | Agronomist • Project Manager • AI Consultant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #00f2ea; /* Neon Emerald/Cyan */
+            --primary-hover: #00c7b3;
+            --secondary-color: #9457eb; /* A secondary accent */
+            --bg-dark: #0a0f1f; /* Very dark blue/purple */
+            --bg-medium: #10182c; /* Slightly lighter dark blue */
+            --bg-light: #1a2035; /* Card background */
+            --text-light: #e0e0e0;
+            --text-medium: #a0a0b0;
+            --text-darker: #707080; /* For less prominent text on dark backgrounds */
+            --text-on-primary: #0a0f1f; /* Text color for primary buttons */
+            --border-color: #2a3045;
+            --gradient-start: var(--primary-color);
+            --gradient-end: var(--secondary-color);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+            background-color: var(--bg-dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-bg-pattern-dots {
+            background-image: radial-gradient(var(--border-color) 0.5px, transparent 0.5px);
+            background-size: 15px 15px;
+        }
+        .section-bg-pattern-grid {
+             background-image: 
+                linear-gradient(var(--border-color) 0.5px, transparent 0.5px), 
+                linear-gradient(to right, var(--border-color) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+
+        .glassmorphism-nav {
+            background-color: rgba(10, 15, 31, 0.75); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(42, 48, 69, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-medium);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            padding: 0.5rem 0; 
+        }
+        .nav-link:hover, .nav-link.active-link {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2.5px; 
+            bottom: -8px; 
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            border-radius: 1px;
+        }
+        .nav-link:hover::after, .nav-link.active-link::after {
+            width: 100%;
+        }
+        .mobile-menu a {
+            color: var(--text-light);
+            padding: 0.85rem 1rem; 
+            border-radius: 8px; 
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+        .mobile-menu a:hover {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            transform: translateX(5px); 
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+         .sliding-name-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(3rem, 20vw, 14rem); 
+            font-weight: 800; 
+            color: rgba(224, 224, 224, 0.02); 
+            white-space: nowrap;
+            z-index: 0; 
+            animation: slideAndFade 50s linear infinite alternate; 
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px; 
+        }
+
+        @keyframes slideAndFade { 
+            0% { transform: translate(-52%, -50%) scale(0.98); opacity: 0.015; }
+            50% { opacity: 0.03; }
+            100% { transform: translate(-48%, -50%) scale(1.02); opacity: 0.015; }
+        }
+
+        .btn-futuristic, .btn-futuristic-outline {
+            font-weight: 600;
+            padding: 0.85rem 2rem; 
+            border-radius: 50px;
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            font-size: 0.9rem;
+        }
+        .btn-futuristic {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: var(--text-on-primary);
+            box-shadow: 0 5px 18px rgba(0, 242, 234, 0.2);
+        }
+        .btn-futuristic:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 10px 25px rgba(0, 242, 234, 0.3);
+        }
+        .btn-futuristic-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2.5px solid var(--primary-color); 
+        }
+        .btn-futuristic-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 18px rgba(0, 242, 234, 0.25);
+        }
+
+        .content-card {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.4s ease;
+            border-radius: 16px; 
+            overflow: hidden;
+            position: relative;
+        }
+        .content-card::before { 
+            content: "";
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: 0; 
+            margin: -1.5px; 
+            border-radius: inherit;
+            background: linear-gradient(160deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+            background-size: 200% 200%;
+            opacity: 0;
+            transition: opacity 0.5s ease, background-position 0.8s ease;
+            animation: gradientBorderShift 8s ease infinite alternate;
+        }
+         @keyframes gradientBorderShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .content-card:hover {
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: 0 15px 30px -5px rgba(0, 242, 234, 0.2), 0 10px 15px -6px rgba(0, 242, 234, 0.15);
+        }
+         .content-card:hover::before {
+            opacity: 1;
+        }
+        .content-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        .content-card .skill-icon, .content-card .project-image i, .contact-card i, .certification-card i {
+             color: var(--primary-color);
+             transition: color 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .content-card:hover .skill-icon, .content-card:hover .project-image i, .contact-card:hover i, .certification-card:hover i {
+            color: var(--primary-hover);
+            transform: scale(1.15) rotate(5deg); 
+        }
+        
+        .timeline-container::before {
+            background: var(--border-color);
+            width: 3px; 
+        }
+        .timeline-dot {
+            background: var(--primary-color);
+            border: 4px solid var(--bg-medium); 
+            width: 24px; height: 24px; 
+            box-shadow: 0 0 10px var(--primary-color); 
+        }
+        .timeline-content h3, .timeline-content h4 { 
+            font-family: 'Orbitron', sans-serif; 
+            color: var(--primary-color);
+        }
+         .timeline-content ul li i {
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            height: 12px; 
+            border-radius: 6px;
+            background-color: var(--border-color);
+            overflow: hidden;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); 
+            border-radius: 6px;
+            transition: width 1.8s cubic-bezier(0.165, 0.84, 0.44, 1); 
+            box-shadow: 0 0 8px var(--primary-color); 
+        }
+        
+        .project-filter-btn {
+            background-color: var(--bg-light);
+            color: var(--text-medium);
+            border: 1.5px solid var(--border-color);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .project-filter-btn.active, .project-filter-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 242, 234, 0.35);
+            transform: scale(1.05);
+        }
+
+        .section-title-underline {
+            width: 120px; 
+            height: 3.5px; 
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+            background-size: 200% 100%; 
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 2px;
+            animation: underlineShine 4s ease-in-out infinite alternate;
+        }
+        @keyframes underlineShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        footer {
+            background-color: var(--bg-medium);
+            border-top: 1px solid var(--border-color);
+        }
+        footer a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 5px var(--primary-color);
+        }
+        footer .fab {
+            transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+        }
+        footer .fab:hover {
+            color: var(--primary-color);
+            transform: scale(1.25) translateY(-2px);
+            text-shadow: 0 0 8px var(--primary-color);
+        }
+
+        #back-to-top {
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 5px 15px rgba(0, 242, 234, 0.3);
+        }
+        #back-to-top:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-5px) scale(1.15);
+            box-shadow: 0 8px 20px rgba(0, 242, 234, 0.4);
+        }
+
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3.5px solid var(--primary-color);
+            animation: typing 4s steps(50, end) forwards, blink-caret 0.75s step-end infinite; 
+            width: 0;
+            animation-fill-mode: forwards;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+        .hero-stats h3 {
+            color: var(--primary-color);
+        }
+        .hero-stats p {
+            color: var(--text-medium);
+        }
+        .hero-stats .content-card:hover {
+            border-color: var(--primary-color); 
+        }
+
+        [data-aos] {
+            opacity: 0;
+            transition-property: transform, opacity;
+        }
+        [data-aos].aos-animate {
+            opacity: 1;
+        }
+        input[type="text"], input[type="email"], textarea {
+            caret-color: var(--primary-color); 
+        }
+        input[type="text"]::placeholder, input[type="email"]::placeholder, textarea::placeholder {
+            color: var(--text-darker);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="glassmorphism-nav fixed w-full z-50 py-3">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <a href="#home" class="text-3xl font-bold font-orbitron text-white hover:text-primary-color transition-colors">Agnihotri<span class="text-primary-color"> Rohan</span></a>
+            
+            <div class="hidden md:flex space-x-6 lg:space-x-8">
+                <a href="#home" class="nav-link font-medium">Home</a>
+                <a href="#about" class="nav-link font-medium">About</a>
+                <a href="#skills" class="nav-link font-medium">Skills</a>
+                <a href="#experience" class="nav-link font-medium">Experience</a>
+                <a href="#projects" class="nav-link font-medium">Projects</a>
+                <a href="#contact" class="nav-link font-medium">Contact</a>
+            </div>
+            
+            <button class="md:hidden focus:outline-none text-primary-color hover:text-primary-hover" id="menu-toggle">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="md:hidden hidden bg-bg-medium shadow-xl mt-1" id="mobile-menu">
+            <div class="flex flex-col space-y-2 px-4 py-3">
+                <a href="#home" class="nav-link font-medium block py-2">Home</a>
+                <a href="#about" class="nav-link font-medium block py-2">About</a>
+                <a href="#skills" class="nav-link font-medium block py-2">Skills</a>
+                <a href="#experience" class="nav-link font-medium block py-2">Experience</a>
+                <a href="#projects" class="nav-link font-medium block py-2">Projects</a>
+                <a href="#contact" class="nav-link font-medium block py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center justify-center pt-28 pb-20 md:pt-36 md:pb-24 relative overflow-hidden text-center">
+        <canvas id="hero-canvas"></canvas>
+        <div class="sliding-name-bg">Agnihotri Rohan</div> <div class="container mx-auto px-4 hero-content-wrapper">
+            <div class="w-full max-w-3xl" data-aos="fade-up" data-aos-delay="100"> <h3 class="text-lg md:text-xl text-text-medium mb-3">Hello, I'm</h3>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-5 font-orbitron">Rohan <span class="gradient-text">Agnihotri</span></h1>
+                <div class="typing-container mb-8 h-14 md:h-auto flex items-center justify-center">
+                    <h2 class="typing-text text-xl md:text-2xl lg:text-3xl text-primary-color">Agronomist • Project Manager • AI Consultant</h2>
+                </div>
+                <p class="text-text-medium mb-10 max-w-xl mx-auto leading-relaxed">
+                    Results-oriented professional with a strong foundation in agri-business operations and a passion for leveraging technology to drive efficiency and innovation.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5 justify-center">
+                    <a href="#contact" class="btn-futuristic px-8 py-3">
+                        <i class="fas fa-paper-plane mr-2.5"></i>Contact Me
+                    </a>
+                    <a href="#projects" class="btn-futuristic-outline px-8 py-3">
+                        <i class="fas fa-briefcase mr-2.5"></i>View Projects
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-24 md:mt-32 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 hero-stats w-full max-w-4xl" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-center p-5 content-card">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2 font-orbitron">4+</h3>
+                    <p class="text-sm text-text-darker">Years Experience</p>
+                </div>
+                <div class="text-center p-5 content-card">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2 font-orbitron">10+</h3>
+                    <p class="text-sm text-text-darker">Projects Completed</p>
+                </div>
+                <div class="text-center p-5 content-card">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2 font-orbitron">20+</h3>
+                    <p class="text-sm text-text-darker">Team Members Led</p>
+                </div>
+                <div class="text-center p-5 content-card">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-2 font-orbitron">3</h3>
+                    <p class="text-sm text-text-darker">Degrees Earned</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 md:py-28 bg-bg-medium section-bg-pattern-dots"> <div class="container mx-auto px-4">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold font-orbitron mb-4 gradient-text" data-aos="fade-up">About Me</h2>
+                <div class="section-title-underline" data-aos="fade-up" data-aos-delay="100"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-16">
+                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right" data-aos-delay="200">
+                    <div class="relative content-card p-1"> 
+                        <div class="bg-bg-light rounded-lg shadow-xl p-6 md:p-8">
+                            <div class="text-center">
+                                <i class="fas fa-user-astronaut text-6xl text-primary-color mb-6"></i> <h3 class="text-2xl md:text-3xl font-semibold mb-4 font-orbitron text-primary-color">My Professional Odyssey</h3>
+                                <p class="text-text-medium mb-6">Bridging traditional agriculture with cutting-edge technology, my journey is focused on innovation and sustainable growth.</p>
+                                <div class="flex flex-wrap justify-center gap-3">
+                                    <span class="px-4 py-2 bg-bg-dark text-primary-color rounded-full text-sm font-medium border border-primary-color/50">Agronomy</span>
+                                    <span class="px-4 py-2 bg-bg-dark text-primary-color rounded-full text-sm font-medium border border-primary-color/50">AI Integration</span>
+                                    <span class="px-4 py-2 bg-bg-dark text-primary-color rounded-full text-sm font-medium border border-primary-color/50">Project Lead</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2" data-aos="fade-left" data-aos-delay="300">
+                    <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-orbitron text-primary-color">Who I Am</h3>
+                    <p class="text-text-medium mb-5 leading-relaxed">
+                        I am an Agronomist and Project Manager with a passion for improving agricultural operations through innovative methodologies and technologies. My journey began with a Bachelor's degree in Agriculture and Food Processing, followed by a Master's in Agronomy, and now pursuing a PhD in Agronomy.
+                    </p>
+                    <p class="text-text-medium mb-5 leading-relaxed">
+                        Throughout my career, I've managed diverse agricultural projects including dairy farms, organic farms, and R&D labs. I excel at optimizing processes, engaging stakeholders, and driving operational efficiency.
+                    </p>
+                    <p class="text-text-medium mb-8 leading-relaxed">
+                        Recently, I've expanded my expertise to include AI applications, particularly focused on how artificial intelligence can transform agricultural practices and business operations, positioning myself as an AI Consultant in the agri-tech space.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-8 text-text-medium">
+                        <div><strong class="text-text-light font-medium">Name:</strong> Rohan Agnihotri</div>
+                        <div><strong class="text-text-light font-medium">Email:</strong> rohanagnihotri0122@gmail.com</div>
+                        <div><strong class="text-text-light font-medium">Phone:</strong> +91 8878866770</div>
+                        <div><strong class="text-text-light font-medium">Location:</strong> Gurugram, India</div>
+                    </div>
+                    
+                    <a href="#contact" class="btn-futuristic px-8 py-3">
+                        <i class="fas fa-link mr-2"></i>Let's Connect
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 md:py-28 bg-bg-dark section-bg-pattern-grid"> <div class="container mx-auto px-4">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold font-orbitron mb-4 gradient-text" data-aos="fade-up">Skills & Expertise</h2>
+                <div class="section-title-underline" data-aos="fade-up" data-aos-delay="100"></div>
+                <p class="text-text-medium mt-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    My expertise is divided into two primary domains: Agricultural Sciences and AI Applications. Each set of skills complements the other, allowing me to bring innovative solutions to traditional challenges.
+                </p>
+            </div>
+            
+            <div class="mb-16 md:mb-20">
+                <h3 class="text-3xl font-semibold mb-10 md:mb-12 font-orbitron text-center text-primary-color" data-aos="fade-up">Agricultural Expertise</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up"> <div class="mb-6 text-center"><i class="fas fa-leaf skill-icon text-5xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3 text-center text-text-light">Agronomy & Crop Science</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Expert knowledge in crop production, plant nutrition, and sustainable farming practices.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">95%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="95%"></div></div>
+                        </div>
+                    </div>
+                    <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up" data-aos-delay="100"> <div class="mb-6 text-center"><i class="fas fa-tractor skill-icon text-5xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3 text-center text-text-light">Farm Operations Management</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Hands-on experience managing diverse agricultural operations including dairy farms, organic farms, and research facilities.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">90%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="90%"></div></div>
+                        </div>
+                    </div>
+                    <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up" data-aos-delay="200"> <div class="mb-6 text-center"><i class="fas fa-warehouse skill-icon text-5xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3 text-center text-text-light">Agricultural Supply Chain</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Expertise in managing end-to-end agricultural supply chains, from procurement to distribution.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">85%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="85%"></div></div>
+                        </div>
+                    </div>
+                    <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up" data-aos-delay="50"> <div class="mb-6 text-center"><i class="fas fa-flask skill-icon text-5xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3 text-center text-text-light">Agricultural Research</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Strong background in conducting research on seed testing, soil analysis, and fertilizer efficacy.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">80%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="80%"></div></div>
+                        </div>
+                    </div>
+                    <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up" data-aos-delay="150"> <div class="mb-6 text-center"><i class="fas fa-spa skill-icon text-5xl"></i></div> <h4 class="text-xl font-semibold mb-3 text-center text-text-light">Specialized Farming Methods</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Certified knowledge in hydroponics, aquaponics, vertical farming, and organic farming.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">85%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="85%"></div></div>
+                        </div>
+                    </div>
+                    <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up" data-aos-delay="250"> <div class="mb-6 text-center"><i class="fas fa-users-cog skill-icon text-5xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3 text-center text-text-light">Team Leadership</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Proven experience leading teams of 20+ personnel, fostering collaboration and achieving goals.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">90%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="90%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-3xl font-semibold mb-10 md:mb-12 font-orbitron text-center text-primary-color" data-aos="fade-up">AI & Technology Skills</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                     <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up">
+                        <div class="mb-6 text-center"><i class="fas fa-robot skill-icon text-5xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3 text-center text-text-light">Generative AI Applications</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Practical knowledge of implementing generative AI solutions for business process optimization.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">80%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="80%"></div></div>
+                        </div>
+                    </div>
+                     <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <div class="mb-6 text-center"><i class="fas fa-cogs skill-icon text-5xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3 text-center text-text-light">AI Workflow Automation</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Experience designing and implementing AI-driven automation workflows to enhance productivity.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">75%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="75%"></div></div>
+                        </div>
+                    </div>
+                     <div class="content-card p-6 md:p-8 flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                        <div class="mb-6 text-center"><i class="fas fa-chart-pie skill-icon text-5xl"></i></div>
+                        <h4 class="text-xl font-semibold mb-3 text-center text-text-light">Data Analysis & Visualization</h4>
+                        <p class="text-text-medium mb-4 text-sm text-center flex-grow">Skilled in Power BI, SQL, and Excel to derive actionable insights for business decision-making.</p>
+                        <div class="mt-auto">
+                            <div class="flex justify-between mb-1 text-sm"><span class="text-text-light">Proficiency</span><span class="text-primary-color font-semibold">85%</span></div>
+                            <div class="progress-bar"><div class="progress-bar-fill" style="width: 0%" data-width="85%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 md:py-28 bg-bg-medium section-bg-pattern-dots">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold font-orbitron mb-4 gradient-text" data-aos="fade-up">Professional Journey</h2>
+                <div class="section-title-underline" data-aos="fade-up" data-aos-delay="100"></div>
+            </div>
+            
+            <div class="timeline-container py-8 relative">
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content w-full md:w-5/12 p-6 md:p-8 rounded-lg shadow-xl content-card">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
+                            <h3 class="text-xl lg:text-2xl font-semibold mb-1 sm:mb-0">Project Manager</h3>
+                            <span class="text-sm text-text-medium">Jul 2023 - Jan 2025</span>
+                        </div>
+                        <h4 class="text-md font-medium text-text-medium mb-4">A2Z 360 MANAGEMENT (OPC) PVT. LTD, Gurugram</h4>
+                        <ul class="text-text-light space-y-2 text-sm">
+                            <li><i class="fas fa-check-circle mr-2"></i>Directed project management for dairy farm operations, organic farms, and research lab initiatives.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Managed marketing campaigns that enhanced product visibility across target markets.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Identified opportunities for cost reduction while maintaining quality standards.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Streamlined supply, distribution, and operational workflows for maximum efficiency.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content w-full md:w-5/12 p-6 md:p-8 rounded-lg shadow-xl content-card">
+                         <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
+                            <h3 class="text-xl lg:text-2xl font-semibold mb-1 sm:mb-0">Farm Manager</h3>
+                            <span class="text-sm text-text-medium">Dec 2022 - Jul 2023</span>
+                        </div>
+                        <h4 class="text-md font-medium text-text-medium mb-4">G.D. Goenka University, Gurugram</h4>
+                        <ul class="text-text-light space-y-2 text-sm">
+                            <li><i class="fas fa-check-circle mr-2"></i>Managed daily farm operations ensuring compliance with regulations.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Supervised crop and livestock production implementing best practices.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Led farm workers, delegating tasks and managing schedules effectively.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Maintained equipment and infrastructure ensuring operational readiness.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content w-full md:w-5/12 p-6 md:p-8 rounded-lg shadow-xl content-card">
+                         <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
+                            <h3 class="text-xl lg:text-2xl font-semibold mb-1 sm:mb-0">Farm and Warehouse Manager</h3>
+                            <span class="text-sm text-text-medium">Jul 2022 - Nov 2022</span>
+                        </div>
+                        <h4 class="text-md font-medium text-text-medium mb-4">R.R. Agro Seeds Pvt. Ltd, Satna, M.P.</h4>
+                        <ul class="text-text-light space-y-2 text-sm">
+                            <li><i class="fas fa-check-circle mr-2"></i>Guided a team of 20+ personnel across sales, procurement, and production.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Negotiated deals with farmers and traders to secure favorable terms.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Monitored inventory and implemented efficient stock management systems.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Managed warehouse operations including storage, handling, and dispatch.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content w-full md:w-5/12 p-6 md:p-8 rounded-lg shadow-xl content-card">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
+                            <h3 class="text-xl lg:text-2xl font-semibold mb-1 sm:mb-0">Remote Data Analyst Trainee</h3>
+                            <span class="text-sm text-text-medium">May 2022 - Sep 2022</span>
+                        </div>
+                        <h4 class="text-md font-medium text-text-medium mb-4">THE MENTOR, Bangalore</h4>
+                        <ul class="text-text-light space-y-2 text-sm">
+                            <li><i class="fas fa-check-circle mr-2"></i>Developed reports using Power BI for enhanced data management.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Utilized data visualization tools to communicate business insights.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Performed data cleansing and analysis using SQL and Excel.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Supported management decision-making through data-driven insights.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content w-full md:w-5/12 p-6 md:p-8 rounded-lg shadow-xl content-card">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
+                            <h3 class="text-xl lg:text-2xl font-semibold mb-1 sm:mb-0">Research Intern</h3>
+                            <span class="text-sm text-text-medium">Feb 2020 - Mar 2020</span>
+                        </div>
+                        <h4 class="text-md font-medium text-text-medium mb-4">KRIBHCO Cooperative, Noida, U.P.</h4>
+                        <ul class="text-text-light space-y-2 text-sm">
+                            <li><i class="fas fa-check-circle mr-2"></i>Conducted research on seed testing and soil analysis.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Studied various fertilizers (organic/inorganic) and bio-fertilizers.</li>
+                            <li><i class="fas fa-check-circle mr-2"></i>Analyzed farmer requirements and challenges for solution development.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 md:mt-28">
+                <h3 class="text-3xl font-semibold mb-10 md:mb-12 font-orbitron text-center text-primary-color" data-aos="fade-up">Educational Background</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="content-card p-6 md:p-8 text-center flex flex-col justify-between" data-aos="fade-up">
+                        <div>
+                            <i class="fas fa-graduation-cap text-5xl text-primary-color mb-5"></i>
+                            <h4 class="text-xl font-semibold font-orbitron mb-2 text-text-light">PhD in Agronomy</h4>
+                            <p class="text-text-medium mb-1">G.D. Goenka University, Gurugram</p>
+                        </div>
+                        <p class="text-sm text-text-darker mt-3">2023 - Present (Pursuing)</p>
+                    </div>
+                    
+                    <div class="content-card p-6 md:p-8 text-center flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                        <div>
+                            <i class="fas fa-award text-5xl text-primary-color mb-5"></i>
+                            <h4 class="text-xl font-semibold font-orbitron mb-2 text-text-light">M.Sc Agronomy</h4>
+                            <p class="text-text-medium mb-1">ITM University, Gwalior</p>
+                            <p class="text-sm text-text-darker mb-1">2020 - 2022</p>
+                        </div>
+                        <p class="text-sm text-primary-color font-semibold mt-3">CGPA: 8.2</p>
+                    </div>
+                    
+                    <div class="content-card p-6 md:p-8 text-center flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                        <div>
+                             <i class="fas fa-award text-5xl text-primary-color mb-5"></i>
+                            <h4 class="text-xl font-semibold font-orbitron mb-2 text-text-light">B.Sc Agriculture & Food Processing</h4>
+                            <p class="text-text-medium mb-1">AMITY University, Noida</p>
+                            <p class="text-sm text-text-darker mb-1">2016 - 2020</p>
+                        </div>
+                        <p class="text-sm text-primary-color font-semibold mt-3">CGPA: 6.9</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 md:py-28 bg-bg-dark section-bg-pattern-grid">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold font-orbitron mb-4 gradient-text" data-aos="fade-up">Featured Projects</h2>
+                <div class="section-title-underline" data-aos="fade-up" data-aos-delay="100"></div>
+            </div>
+            
+            <div class="flex flex-wrap justify-center mb-12 gap-3" data-aos="fade-up" data-aos-delay="200">
+                <button class="project-filter-btn px-6 py-2.5 rounded-full active">All</button> <button class="project-filter-btn px-6 py-2.5 rounded-full">Agriculture</button>
+                <button class="project-filter-btn px-6 py-2.5 rounded-full">Management</button>
+                <button class="project-filter-btn px-6 py-2.5 rounded-full">Technology</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="content-card" data-category="Agriculture Management" data-aos="fade-up">
+                    <div class="project-image h-56 bg-bg-medium flex items-center justify-center overflow-hidden"><i class="fas fa-tractor text-7xl"></i></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold font-orbitron text-text-light">Dairy Farm Optimization</h3>
+                            <span class="px-3 py-1 bg-primary-color/20 text-primary-color rounded-full text-xs font-medium">Agriculture</span>
+                        </div>
+                        <p class="text-text-medium text-sm mb-4">Implemented strategies for dairy farm operations, increasing production efficiency by 20% and reducing costs by 15%.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Logistics</span>
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Production</span>
+                            </div>
+                            <a href="#" class="text-primary-color hover:text-primary-hover transition text-lg"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card" data-category="Agriculture Management" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-image h-56 bg-bg-medium flex items-center justify-center overflow-hidden"><i class="fas fa-seedling text-7xl"></i></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold font-orbitron text-text-light">Organic Certification Program</h3>
+                             <span class="px-3 py-1 bg-primary-color/20 text-primary-color rounded-full text-xs font-medium">Agriculture</span>
+                        </div>
+                        <p class="text-text-medium text-sm mb-4">Developed and implemented a program for organic farming certification, including documentation, training, and compliance.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Certification</span>
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Training</span>
+                            </div>
+                            <a href="#" class="text-primary-color hover:text-primary-hover transition text-lg"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card" data-category="Management Technology" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-image h-56 bg-bg-medium flex items-center justify-center overflow-hidden"><i class="fas fa-chart-line text-7xl"></i></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold font-orbitron text-text-light">Agricultural Market Analysis</h3>
+                            <span class="px-3 py-1 bg-secondary-color/20 text-secondary-color rounded-full text-xs font-medium">Management</span>
+                        </div>
+                        <p class="text-text-medium text-sm mb-4">Conducted market research identifying new opportunities, resulting in entry into three new market segments and 25% revenue growth.</p>
+                         <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Research</span>
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Strategy</span>
+                            </div>
+                            <a href="#" class="text-primary-color hover:text-primary-hover transition text-lg"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="content-card" data-category="Management Technology" data-aos="fade-up" data-aos-delay="50">
+                    <div class="project-image h-56 bg-bg-medium flex items-center justify-center overflow-hidden"><i class="fas fa-warehouse text-7xl"></i></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold font-orbitron text-text-light">Warehouse Management System</h3>
+                             <span class="px-3 py-1 bg-secondary-color/20 text-secondary-color rounded-full text-xs font-medium">Management</span>
+                        </div>
+                        <p class="text-text-medium text-sm mb-4">Designed and implemented an efficient WMS for agricultural products, improving inventory accuracy by 30% and reducing processing time by 40%.</p>
+                         <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Inventory</span>
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Logistics</span>
+                            </div>
+                            <a href="#" class="text-primary-color hover:text-primary-hover transition text-lg"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="content-card" data-category="Management" data-aos="fade-up" data-aos-delay="150">
+                    <div class="project-image h-56 bg-bg-medium flex items-center justify-center overflow-hidden"><i class="fas fa-users text-7xl"></i></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold font-orbitron text-text-light">Farm Team Development</h3>
+                            <span class="px-3 py-1 bg-secondary-color/20 text-secondary-color rounded-full text-xs font-medium">Management</span>
+                        </div>
+                        <p class="text-text-medium text-sm mb-4">Created and implemented a comprehensive training program for agricultural workers, improving productivity by 35% and reducing turnover by 25%.</p>
+                         <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Training</span>
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">HR</span>
+                            </div>
+                            <a href="#" class="text-primary-color hover:text-primary-hover transition text-lg"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="content-card" data-category="Technology Agriculture" data-aos="fade-up" data-aos-delay="250">
+                    <div class="project-image h-56 bg-bg-medium flex items-center justify-center overflow-hidden"><i class="fas fa-robot text-7xl"></i></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-semibold font-orbitron text-text-light">AI-Powered Crop Analysis</h3>
+                             <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-medium">Technology</span>
+                        </div>
+                        <p class="text-text-medium text-sm mb-4">Implemented AI-based system for analyzing crop health and predicting yields, resulting in 15% improvement in harvest planning and resource allocation.</p>
+                         <div class="flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">AI</span>
+                                <span class="px-2.5 py-1 bg-bg-dark text-text-medium rounded-full text-xs border border-border-color">Analytics</span>
+                            </div>
+                            <a href="#" class="text-primary-color hover:text-primary-hover transition text-lg"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="py-20 md:py-28 bg-bg-medium section-bg-pattern-dots">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold font-orbitron mb-4 gradient-text" data-aos="fade-up">Certifications & Training</h2>
+                <div class="section-title-underline" data-aos="fade-up" data-aos-delay="100"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="content-card certification-card p-6 text-center flex flex-col items-center justify-center" data-aos="fade-up">
+                    <i class="fas fa-award text-5xl mb-5"></i> <h3 class="text-xl font-semibold mb-2 font-orbitron text-text-light">Data Analyst Certification</h3>
+                    <p class="text-text-medium mb-1">The Mentor, Bangalore</p>
+                    <p class="text-sm text-text-darker">May 2022</p>
+                </div>
+                <div class="content-card certification-card p-6 text-center flex flex-col items-center justify-center" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-water text-5xl mb-5"></i>
+                    <h3 class="text-xl font-semibold mb-2 font-orbitron text-text-light">Hydroponics & Aquaponics</h3>
+                    <p class="text-text-medium mb-1">G.D. Goenka / ITM University</p>
+                    <p class="text-sm text-text-darker">2022</p>
+                </div>
+                <div class="content-card certification-card p-6 text-center flex flex-col items-center justify-center" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-leaf text-5xl mb-5"></i> <h3 class="text-xl font-semibold mb-2 font-orbitron text-text-light">Vertical & Organic Farming</h3>
+                    <p class="text-text-medium mb-1">G.D. Goenka University</p>
+                    <p class="text-sm text-text-darker">January 2023</p>
+                </div>
+                <div class="content-card certification-card p-6 text-center flex flex-col items-center justify-center" data-aos="fade-up" data-aos-delay="50">
+                     <i class="fas fa-comments text-5xl mb-5"></i>
+                    <h3 class="text-xl font-semibold mb-2 font-orbitron text-text-light">Corporate Communication</h3>
+                    <p class="text-text-medium mb-1">Amity University</p>
+                    <p class="text-sm text-text-darker">December 2020</p>
+                </div>
+                <div class="content-card certification-card p-6 text-center flex flex-col items-center justify-center" data-aos="fade-up" data-aos-delay="150">
+                    <i class="fas fa-brain text-5xl mb-5"></i>
+                    <h3 class="text-xl font-semibold mb-2 font-orbitron text-text-light">Generative AI</h3>
+                    <p class="text-text-medium mb-1">Self-paced Learning</p>
+                    <p class="text-sm text-text-darker">2024</p>
+                </div>
+                <div class="content-card certification-card p-6 text-center flex flex-col items-center justify-center" data-aos="fade-up" data-aos-delay="250">
+                    <i class="fas fa-cogs text-5xl mb-5"></i> <h3 class="text-xl font-semibold mb-2 font-orbitron text-text-light">AI Workflow Automation</h3>
+                    <p class="text-text-medium mb-1">Self-paced Learning</p>
+                    <p class="text-sm text-text-darker">2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 md:py-28 bg-bg-dark section-bg-pattern-grid">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold font-orbitron mb-4 gradient-text" data-aos="fade-up">Get In Touch</h2>
+                <div class="section-title-underline" data-aos="fade-up" data-aos-delay="100"></div>
+                <p class="text-text-medium max-w-3xl mx-auto mt-8" data-aos="fade-up" data-aos-delay="200">
+                    I'm always open to discussing new projects, innovative ideas, or opportunities to be part of your vision. Feel free to reach out to me.
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+                <div class="lg:w-2/5" data-aos="fade-right" data-aos-delay="300">
+                    <div class="space-y-6">
+                        <div class="content-card contact-card p-6 flex items-start space-x-5">
+                            <i class="fas fa-phone-alt text-3xl mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1 text-text-light">Phone</h4>
+                                <a href="tel:+918878866770" class="text-text-medium hover:text-primary-color transition-colors">+91 8878866770</a>
+                            </div>
+                        </div>
+                        <div class="content-card contact-card p-6 flex items-start space-x-5">
+                            <i class="fas fa-envelope text-3xl mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1 text-text-light">Email</h4>
+                                <a href="mailto:rohanagnihotri0122@gmail.com" class="text-text-medium hover:text-primary-color transition-colors break-all">rohanagnihotri0122@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="content-card contact-card p-6 flex items-start space-x-5">
+                            <i class="fas fa-map-marker-alt text-3xl mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1 text-text-light">Location</h4>
+                                <p class="text-text-medium">Gurugram, Haryana, India</p>
+                            </div>
+                        </div>
+                         <div class="content-card contact-card p-6 flex items-start space-x-5">
+                            <i class="fab fa-linkedin-in text-3xl mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1 text-text-light">LinkedIn</h4>
+                                <a href="https://linkedin.com/in/rohanagnihotri" target="_blank" rel="noopener noreferrer" class="text-text-medium hover:text-primary-color transition-colors break-all">linkedin.com/in/rohanagnihotri</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10 content-card p-6" data-aos="fade-up" data-aos-delay="400">
+                        <h3 class="text-xl font-semibold mb-4 font-orbitron text-text-light">Connect Socially</h3>
+                        <p class="text-text-medium mb-6 text-sm">
+                            Follow my journey and connect on social media.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="https://linkedin.com/in/rohanagnihotri" target="_blank" rel="noopener noreferrer" class="btn-futuristic-outline !p-3.5 !rounded-full" aria-label="LinkedIn"><i class="fab fa-linkedin-in text-xl"></i></a>
+                            <a href="#" class="btn-futuristic-outline !p-3.5 !rounded-full" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                            <a href="#" class="btn-futuristic-outline !p-3.5 !rounded-full" aria-label="GitHub"><i class="fab fa-github text-xl"></i></a>
+                            <a href="#" class="btn-futuristic-outline !p-3.5 !rounded-full" aria-label="WhatsApp"><i class="fab fa-whatsapp text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-3/5" data-aos="fade-left" data-aos-delay="400">
+                    <div class="content-card p-6 md:p-8">
+                        <h3 class="text-2xl md:text-3xl font-semibold mb-8 font-orbitron text-text-light">Send Me a Message</h3>
+                        <form id="contact-form" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-text-medium font-medium mb-2 text-sm">Your Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3.5 bg-bg-dark border border-border-color rounded-lg focus:outline-none focus:border-primary-color focus:ring-2 focus:ring-primary-color/50 text-text-light placeholder-text-darker" placeholder="Enter your name" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-text-medium font-medium mb-2 text-sm">Email Address</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3.5 bg-bg-dark border border-border-color rounded-lg focus:outline-none focus:border-primary-color focus:ring-2 focus:ring-primary-color/50 text-text-light placeholder-text-darker" placeholder="Enter your email" required>
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-text-medium font-medium mb-2 text-sm">Subject</label>
+                                <input type="text" id="subject" name="subject" class="w-full px-4 py-3.5 bg-bg-dark border border-border-color rounded-lg focus:outline-none focus:border-primary-color focus:ring-2 focus:ring-primary-color/50 text-text-light placeholder-text-darker" placeholder="Enter subject" required>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-text-medium font-medium mb-2 text-sm">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3.5 bg-bg-dark border border-border-color rounded-lg focus:outline-none focus:border-primary-color focus:ring-2 focus:ring-primary-color/50 text-text-light placeholder-text-darker" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-futuristic w-full py-4 text-lg">Send Message <i class="fas fa-paper-plane ml-2.5"></i></button>
+                        </form>
+                         <div id="form-message" class="mt-5 text-center text-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <div class="lg:col-span-1">
+                     <a href="#home" class="text-3xl font-bold font-orbitron text-white hover:text-primary-color transition-colors">Agnihotri<span class="text-primary-color"> Rohan</span></a>
+                    <p class="text-text-medium mt-4 text-sm leading-relaxed">
+                        Agricultural professional leveraging expertise in farm management, project coordination, and emerging technologies to drive innovation and efficiency.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 font-orbitron text-text-light">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-text-medium hover:text-primary-color transition text-sm">Home</a></li>
+                        <li><a href="#about" class="text-text-medium hover:text-primary-color transition text-sm">About</a></li>
+                        <li><a href="#skills" class="text-text-medium hover:text-primary-color transition text-sm">Skills</a></li>
+                        <li><a href="#experience" class="text-text-medium hover:text-primary-color transition text-sm">Experience</a></li>
+                        <li><a href="#projects" class="text-text-medium hover:text-primary-color transition text-sm">Projects</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 font-orbitron text-text-light">Services</h4>
+                    <ul class="space-y-3">
+                        <li><span class="text-text-medium text-sm">Farm Management</span></li>
+                        <li><span class="text-text-medium text-sm">Project Coordination</span></li>
+                        <li><span class="text-text-medium text-sm">Agricultural Consulting</span></li>
+                        <li><span class="text-text-medium text-sm">AI Implementation</span></li>
+                        <li><span class="text-text-medium text-sm">Data Analysis</span></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="text-lg font-semibold mb-6 font-orbitron text-text-light">Contact Info</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-phone-alt mt-1 text-primary-color"></i>
+                            <a href="tel:+918878866770" class="text-text-medium hover:text-primary-color transition">+91 8878866770</a>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-envelope mt-1 text-primary-color"></i>
+                            <a href="mailto:rohanagnihotri0122@gmail.com" class="text-text-medium hover:text-primary-color transition break-all">rohanagnihotri0122@gmail.com</a>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-primary-color"></i>
+                            <span class="text-text-medium">Gurugram, Haryana, India</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border-color mt-12 pt-10">
+                <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                    <p class="text-text-medium mb-4 md:mb-0">&copy; <span id="currentYear"></span> Rohan Agnihotri. All rights reserved. Architecting the Future of Agriculture.</p>
+                    <div class="flex space-x-5">
+                        <a href="https://linkedin.com/in/rohanagnihotri" target="_blank" rel="noopener noreferrer" class="text-text-medium hover:text-primary-color transition" aria-label="LinkedIn"><i class="fab fa-linkedin-in text-xl"></i></a>
+                        <a href="#" class="text-text-medium hover:text-primary-color transition" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-text-medium hover:text-primary-color transition" aria-label="GitHub"><i class="fab fa-github text-xl"></i></a>
+                         <a href="#" class="text-text-medium hover:text-primary-color transition" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full flex items-center justify-center shadow-2xl opacity-0 invisible transition-all duration-300 z-50">
+        <i class="fas fa-arrow-up text-lg"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize EmailJS with your Public Key
+        (function(){
+            emailjs.init("AXNXTtpHQqoK_X6FQ"); // YOUR PUBLIC KEY
+        })();
+
+        // Initialize AOS
+        AOS.init({
+            duration: 900, 
+            easing: 'ease-out-cubic', 
+            once: true, 
+            mirror: false 
+        });
+        
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (menuToggle && mobileMenu) {
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuToggle.querySelector('i').classList.toggle('fa-bars');
+                menuToggle.querySelector('i').classList.toggle('fa-times');
+            });
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuToggle.querySelector('i').classList.remove('fa-times');
+                    menuToggle.querySelector('i').classList.add('fa-bars');
+                });
+            });
+        }
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        if (backToTopButton) {
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 350) { 
+                    backToTopButton.classList.remove('opacity-0', 'invisible', 'transform', 'scale-0');
+                    backToTopButton.classList.add('opacity-100', 'visible', 'transform', 'scale-100');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible', 'transform', 'scale-100');
+                    backToTopButton.classList.add('opacity-0', 'invisible', 'transform', 'scale-0');
+                }
+            });
+            backToTopButton.classList.add('transform', 'scale-0');
+
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        
+        // Project Filter
+        const filterButtons = document.querySelectorAll('.project-filter-btn');
+        const projectCards = document.querySelectorAll('#projects .content-card'); 
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const filterCategory = button.textContent.trim().toLowerCase();
+                
+                projectCards.forEach(card => {
+                    const cardCategoriesText = (card.dataset.category || "").toLowerCase();
+                    const categoriesArray = cardCategoriesText.split(' '); 
+                    
+                    const matchesCategory = categoriesArray.some(cat => cat.includes(filterCategory));
+
+                    if (filterCategory === "all" || matchesCategory) {
+                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        card.style.display = 'block';
+                        setTimeout(() => { 
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 400);
+                    }
+                });
+            });
+        });
+        
+        // Contact Form with EmailJS
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+        const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+
+
+        if (contactForm && formMessage && submitButton) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Show loading state
+                formMessage.textContent = 'Sending your message...';
+                formMessage.className = 'mt-5 text-center text-sm text-yellow-400'; // Use a color for loading
+                submitButton.disabled = true;
+                submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+
+
+                // Prepare parameters for EmailJS
+                // Ensure your EmailJS template uses these exact variable names:
+                // {{name}}, {{email}}, {{subject}}, {{message}}
+                const templateParams = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+
+                // Your EmailJS Service ID and Template ID
+                const serviceID = 'service_bugsdyi'; // YOUR SERVICE ID
+                const templateID = 'template_inxbykd'; // YOUR TEMPLATE ID
+
+                emailjs.send(serviceID, templateID, templateParams)
+                    .then(function(response) {
+                       formMessage.textContent = 'Message sent successfully! Thank you.';
+                       formMessage.className = 'mt-5 text-center text-sm text-green-400'; // Success color
+                       contactForm.reset();
+                       setTimeout(() => formMessage.textContent = '', 7000); // Clear message after 7s
+                    }, function(error) {
+                       formMessage.textContent = 'Failed to send message. Please try again. Error: ' + JSON.stringify(error);
+                       formMessage.className = 'mt-5 text-center text-sm text-red-400'; // Error color
+                       console.error('EmailJS Error:', error);
+                    })
+                    .finally(() => {
+                        // Re-enable button
+                        submitButton.disabled = false;
+                        submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+                    });
+            });
+        }
+        
+        // Animate progress bars when they become visible
+        const progressBars = document.querySelectorAll('.progress-bar-fill');
+        const animateProgress = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const targetWidth = bar.getAttribute('data-width');
+                    setTimeout(() => { 
+                       bar.style.width = targetWidth;
+                    }, 200);
+                    observer.unobserve(bar);
+                }
+            });
+        };
+        const progressObserver = new IntersectionObserver(animateProgress, {
+            root: null,
+            threshold: 0.3 
+        });
+        progressBars.forEach(bar => {
+            progressObserver.observe(bar);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const hrefAttribute = this.getAttribute('href');
+                if (hrefAttribute && hrefAttribute.startsWith("#") && hrefAttribute.length > 1) {
+                    const targetElement = document.querySelector(hrefAttribute);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const navbarHeight = document.querySelector('nav').offsetHeight || 70; 
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden') && this.closest('#mobile-menu')) {
+                            mobileMenu.classList.add('hidden');
+                            menuToggle.querySelector('i').classList.remove('fa-times');
+                            menuToggle.querySelector('i').classList.add('fa-bars');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Current Year for Footer
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+
+        // Three.js Hero Background Animation
+        let scene, camera, renderer, particles;
+        const heroSection = document.getElementById('home'); 
+        const canvas = document.getElementById('hero-canvas');
+
+        function initThreeJS() {
+            if (!heroSection || !canvas || typeof THREE === 'undefined') {
+                if(typeof THREE === 'undefined') console.error("Three.js library not loaded for Hero Background.");
+                return;
+            }
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(65, heroSection.clientWidth / heroSection.clientHeight, 0.1, 1000); 
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
+
+            function updateRendererSize() {
+                const width = heroSection.clientWidth;
+                const height = heroSection.clientHeight;
+                if (width === 0 || height === 0) return; 
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            }
+            updateRendererSize();
+
+            const particleCount = 800; 
+            const particlesGeometry = new THREE.BufferGeometry();
+            const posArray = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 25; 
+            }
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 0.035, 
+                map: createParticleTexture(),
+                transparent: true,
+                opacity: 0.65, 
+                blending: THREE.AdditiveBlending,
+                depthWrite: false 
+            });
+            const primaryColorTHREE = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim());
+            particleMaterial.color.set(primaryColorTHREE);
+
+            particles = new THREE.Points(particlesGeometry, particleMaterial);
+            scene.add(particles);
+            camera.position.z = 5.5; 
+
+            window.addEventListener('resize', updateRendererSize);
+        }
+
+        function createParticleTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 128; 
+            canvas.height = 128;
+            const context = canvas.getContext('2d');
+            const gradient = context.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2);
+            gradient.addColorStop(0, 'rgba(255,255,255,1)');
+            gradient.addColorStop(0.15, 'rgba(255,255,255,0.7)'); 
+            gradient.addColorStop(0.6, 'rgba(255,255,255,0.05)'); 
+            gradient.addColorStop(1, 'rgba(255,255,255,0)');
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        let mouseX = 0, mouseY = 0;
+        const onDocumentMouseMove = (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2); 
+            mouseY = (event.clientY - window.innerHeight / 2) / (window.innerHeight / 2); 
+        }
+        document.addEventListener('mousemove', onDocumentMouseMove);
+
+        function animateThreeJS() {
+            if (!scene || !camera || !renderer) return;
+            requestAnimationFrame(animateThreeJS);
+            
+            if (particles) {
+                particles.rotation.x += 0.00008; 
+                particles.rotation.y += 0.00012;
+
+                camera.position.x += (mouseX * 0.05 - camera.position.x) * 0.015; 
+                camera.position.y += (-mouseY * 0.05 - camera.position.y) * 0.015; 
+                camera.lookAt(scene.position);
+            }
+            renderer.render(scene, camera);
+        }
+        
+        window.addEventListener('load', () => {
+            if (typeof THREE !== 'undefined') {
+                initThreeJS();
+                animateThreeJS();
+            } else {
+                console.error("Three.js library not found.");
+            }
+        });
+
+        // Active Nav Link on Scroll
+        const sectionsForNav = document.querySelectorAll('section[id]');
+        const navLinksForScroll = document.querySelectorAll('nav a.nav-link');
+
+        function changeNavActiveState() {
+            let index = sectionsForNav.length;
+            const navbarHeight = document.querySelector('nav').offsetHeight || 70;
+
+            while(--index && window.scrollY + navbarHeight + 50 < sectionsForNav[index].offsetTop) {}
+            
+            navLinksForScroll.forEach((link) => link.classList.remove('active-link'));
+            if(navLinksForScroll[index]) {
+                 navLinksForScroll[index].classList.add('active-link');
+            } else if (sectionsForNav[index] && sectionsForNav[index].id === 'home' && navLinksForScroll[0]) { 
+                 navLinksForScroll[0].classList.add('active-link');
+            }
+        }
+        changeNavActiveState(); 
+        window.addEventListener('scroll', changeNavActiveState);
+
+    </script>
+</body>
+</html>
